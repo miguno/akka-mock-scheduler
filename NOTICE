@@ -1,0 +1,4 @@
+* akka-mock-scheduler was inspired by the `MockTime` and `MockServer` included in Apache Kafka, which are released
+  under the Apache License, Version 2.0:
+  https://github.com/apache/kafka/blob/trunk/core/src/test/scala/unit/kafka/utils/MockTime.scala
+  https://github.com/apache/kafka/blob/trunk/core/src/test/scala/unit/kafka/utils/MockScheduler.scala
