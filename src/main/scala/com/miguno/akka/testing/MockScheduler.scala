@@ -75,9 +75,22 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
 
   private case class FakeCancellable() extends Cancellable {
 
-    override def cancel(): Boolean = ???
+    /**
+     * No-op cancel, i.e. this method will do nothing.
+     *
+     * We decided to use such a noop-always-returns-false strategy instead of throwing NotImplementedErrors to
+     * make the use of [[FakeCancellable]] more convenient in "typical" testing code.
+     *
+     * @return Always returns false.
+     */
+    override def cancel(): Boolean = false
 
-    override def isCancelled: Boolean = ???
+    /**
+     * Because `cancel()` is currently a no-op this method will always return false.
+     *
+     * @return Always returns false.
+     */
+    override def isCancelled: Boolean = false
 
   }
 

@@ -193,15 +193,16 @@ Example output:
       `20 millis`, respectively.  If you now `advance()` the time straight to `50 millis`, then A will be executed first
       and, once A has finished and without any further delay, B will be executed immediately.
 * Tasks are executed synchronously when the scheduler's `tick()` method is called.
-* For simplicity reasons the `akka.actor.Cancellable` instances returned by this scheduler are not functional and will
-  throw `NotImplementedError` when you call their `Cancellable.cancel()` and `Cancellable.isCancelled` methods.
+* For simplicity reasons the `akka.actor.Cancellable` instances returned by this scheduler are not really functional.
+  The `Cancellable.cancel()` method is a no-op and will always return false.  To adhere to the `Cancellable` contract, this
+  means that `Cancellable.isCancelled` will always return false, too.
 
 
 <a name="License"></a>
 
 # License
 
-Copyright © 2014 Michael G. Noll
+Copyright © 2014-2015 Michael G. Noll
 
 See [LICENSE](LICENSE) for licensing information.
 
