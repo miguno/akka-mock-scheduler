@@ -42,9 +42,42 @@ Please note that the scope of this project is not to become a full-fledged testi
 
 <a name="Usage"></a>
 
-# Usage examples
+# Usage
 
-## Example 1
+## Build dependency
+
+This project is published to [Sonatype](https://oss.sonatype.org/).
+
+* Snapshots are available in the Maven repository at
+  [https://oss.sonatype.org/content/repositories/snapshots](https://oss.sonatype.org/content/repositories/snapshots)
+* Releases are available on [Maven Central](http://search.maven.org/).
+
+When using a **snapshot**:
+
+```scala
+resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
+
+// Scala 2.10
+libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.10" % "0.2.0-SNAPSHOT")
+
+// Scala 2.11
+libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.11" % "0.2.0-SNAPSHOT")
+```
+
+When using a **release** (note: no release has been published yet!):
+
+```scala
+// Scala 2.10
+libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.10" % "0.2.0")
+
+// Scala 2.11
+libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.11" % "0.2.0")
+```
+
+
+## Examples
+
+### Example 1
 
 In this example we schedule a one-time task to run in 5 milliseconds from "now".  We create an instance of
 [`VirtualTime`](src/main/scala/com/miguno/akka/testing/VirtualTime.scala), which contains its own
@@ -76,7 +109,7 @@ assert(counter.get == 1) // <<< task was run at the right time!
 ```
 
 
-## Example 2
+### Example 2
 
 In your code you may want to make the scheduler configurable.  In the following example the class `Foo` has a field
 `scheduler` that defaults to Akka's `system.scheduler` (cf. `akka.actor.ActorSystem#scheduler`).
@@ -101,7 +134,7 @@ val foo = Foo(time.scheduler)
 ```
 
 
-## Further examples
+### Further examples
 
 See [MockSchedulerSpec](https://github.com/miguno/akka-mock-scheduler/blob/develop/src/test/scala/com/miguno/akka/testing/MockSchedulerSpec.scala)
 for further details and examples.
