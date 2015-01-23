@@ -9,6 +9,8 @@ Table of Contents
 * <a href="#Motivation">Motivation</a>
 * <a href="#Usage">Usage examples</a>
 * <a href="#Design">Design and limitations</a>
+* <a href="#Development">Development</a>
+* <a href="#Changelog">Change log</a>
 * <a href="#License">License</a>
 * <a href="#Credits">Credits</a>
 
@@ -48,23 +50,11 @@ Please note that the scope of this project is not to become a full-fledged testi
 
 This project is published to [Sonatype](https://oss.sonatype.org/).
 
-* Snapshots are available in the Maven repository at
-  [https://oss.sonatype.org/content/repositories/snapshots](https://oss.sonatype.org/content/repositories/snapshots)
 * Releases are available on [Maven Central](http://search.maven.org/).
+* Snapshots are available in the
+  [Sonatype Snapshot repository](https://oss.sonatype.org/content/repositories/snapshots).
 
-When using a **snapshot**:
-
-```scala
-resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
-
-// Scala 2.10
-libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.10" % "0.2.0-SNAPSHOT")
-
-// Scala 2.11
-libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.11" % "0.2.0-SNAPSHOT")
-```
-
-When using a **release** (note: no release has been published yet!):
+When using a **release**:
 
 ```scala
 // Scala 2.10
@@ -72,6 +62,18 @@ libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.10" % "0.2.0")
 
 // Scala 2.11
 libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.11" % "0.2.0")
+```
+
+When using a **snapshot**:
+
+```scala
+resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
+
+// Scala 2.10
+libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.10" % "0.3.0-SNAPSHOT")
+
+// Scala 2.11
+libraryDependencies ++= Seq("com.miguno" % "akka-mock-scheduler_2.11" % "0.3.0-SNAPSHOT")
 ```
 
 
@@ -260,10 +262,33 @@ Example output:
     $ ./sbt "+ test"
 
 
-## Publishing to SonaType
+## Publishing to Sonatype
 
-    # Publishing a snapshot
-    $ ./sbt "+ publishSigned"
+
+### Publishing a snaphost
+
+1. Make sure that the version identifier in `version.sbt` has a `-SNAPSHOT` suffix.
+2. Publish the snapshot:
+
+        $ ./sbt "+ test" && ./sbt "+ publishSigned"
+
+
+### Publishing a release
+
+1. Make sure that the version identifier in `version.sbt` DOES NOT have a `-SNAPSHOT` suffix.
+2. Publish the release artifacts into the Sonatype staging repository:
+
+        $ ./sbt "+ test" && ./sbt "+ publishSigned"
+
+3. Follow the Sonatype instructions to
+   [release a deployment](http://central.sonatype.org/pages/releasing-the-deployment.html).
+
+
+<a name="Changelog"></a>
+
+# Change log
+
+See [CHANGELOG](CHANGELOG.md).
 
 
 <a name="License"></a>
