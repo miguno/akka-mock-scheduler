@@ -12,6 +12,9 @@ addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "3.0.0")
 // https://github.com/jrudolph/sbt-dependency-graph
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.7.4")
 
-// See https://github.com/scoverage/scalac-scoverage-plugin
-// and https://github.com/scoverage/sbt-scoverage
+// https://github.com/scoverage/scalac-scoverage-plugin
+// https://github.com/scoverage/sbt-scoverage
 addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.0.2")
+
+// https://github.com/scoverage/sbt-coveralls
+addSbtPlugin("org.scoverage" % "sbt-coveralls" % "1.0.0.BETA1")
