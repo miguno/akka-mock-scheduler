@@ -1,6 +1,6 @@
 package com.miguno.akka.testing
 
-import org.scalatest.{GivenWhenThen, Matchers, FunSpec}
+import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 
 class FakeCancellableSpec extends FunSpec with Matchers with GivenWhenThen {
 

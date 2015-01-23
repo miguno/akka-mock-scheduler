@@ -12,7 +12,7 @@ import scala.concurrent.duration._
  * Typically this scheduler is used indirectly via a [[VirtualTime]] instance.
  *
  * Note: For simplicity reasons the [[Cancellable]] instances returned by this scheduler are not functional.
- * [[Cancellable.cancel()]] is a no-op and will always return false.  This has the effect that
+ * [[Cancellable.cancel( )]] is a no-op and will always return false.  This has the effect that
  * [[Cancellable.isCancelled]] will always return false, too, to adhere to the contract of [[Cancellable]].
  *
  * @param time
@@ -52,7 +52,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
     addToTasks(delay, runnable, None)
 
   override def schedule(initialDelay: FiniteDuration, interval: FiniteDuration, runnable: Runnable)
-                             (implicit executor: ExecutionContext): Cancellable =
+                       (implicit executor: ExecutionContext): Cancellable =
     addToTasks(initialDelay, runnable, Option(interval))
 
   private def addToTasks(delay: FiniteDuration, runnable: Runnable, interval: Option[FiniteDuration]): Cancellable =
@@ -65,7 +65,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
   override val maxFrequency: Double = 1.second / 1.millis
 
   private case class Task(delay: FiniteDuration, runnable: Runnable, interval: Option[FiniteDuration])
-    extends Ordered[Task] {
+      extends Ordered[Task] {
 
     def compare(t: Task): Int =
       if (delay == t.delay) 0
