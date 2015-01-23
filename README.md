@@ -1,4 +1,4 @@
-# akka-mock-scheduler
+# akka-mock-scheduler [![Build Status](https://travis-ci.org/miguno/akka-mock-scheduler.png?branch=master)](https://travis-ci.org/miguno/akka-mock-scheduler)
 
 A mock Akka scheduler to simplify testing of scheduler-dependent code.
 
