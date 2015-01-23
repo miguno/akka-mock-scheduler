@@ -146,24 +146,21 @@ the mock scheduler and virtual time work:
 
 Example output:
 
-    [info] VirtualTimeSpec:
-    [info] VirtualTime
-    [info] - should start at time zero
-    [info]   + Given no time
-    [info]   + When I create a time
-    [info]   + Then its elapsed time should be zero
-    [info] - should track elapsed time
-    [info]   + Given a time
-    [info]   + When I advance the time
-    [info]   + Then the elapsed time should be correct
-    [info] - should accept a step defined as a Long that represents the number of milliseconds
-    [info]   + Given a time
-    [info]   + When I advance the time by a Long value of 1234
-    [info]   + Then the elapsed time should be 1234 milliseconds
-    [info] - should have a meaningful string representation
-    [info]   + Given a time
-    [info]   + When I request its string representation
-    [info]   + Then the representation should include the elapsed time in milliseconds
+    [info] FakeCancellableSpec:
+    [info] FakeCancellable
+    [info] - should return false when cancelled
+    [info]   + Given an instance
+    [info]   + When I cancel it
+    [info]   + Then then it returns false
+    [info] - isCancelled should return false when cancel was not called yet
+    [info]   + Given an instance
+    [info]   + When I ask whether it has been successfully cancelled
+    [info]   + Then then it returns false
+    [info] - isCancelled should return false when cancel was called already
+    [info]   + Given an instance
+    [info]   + And the instance was cancelled
+    [info]   + When I ask whether it has been successfully cancelled
+    [info]   + Then then it returns false
     [info] MockSchedulerSpec:
     [info] MockScheduler
     [info] - should run a one-time task once
@@ -209,12 +206,29 @@ Example output:
     [info]   + When I schedule a task A that schedules another task B
     [info]   + And I advance the time so that A was already run (and thus B is now registered with the scheduler)
     [info]   + Then B should be run with the configured delay (which will happen in one of the next ticks of the scheduler)
-    [info] Run completed in 313 milliseconds.
-    [info] Total number of tests run: 10
-    [info] Suites: completed 2, aborted 0
-    [info] Tests: succeeded 10, failed 0, canceled 0, ignored 0, pending 0
+    [info] VirtualTimeSpec:
+    [info] VirtualTime
+    [info] - should start at time zero
+    [info]   + Given no time
+    [info]   + When I create a time
+    [info]   + Then its elapsed time should be zero
+    [info] - should track elapsed time
+    [info]   + Given a time
+    [info]   + When I advance the time
+    [info]   + Then the elapsed time should be correct
+    [info] - should accept a step defined as a Long that represents the number of milliseconds
+    [info]   + Given a time
+    [info]   + When I advance the time by a Long value of 1234
+    [info]   + Then the elapsed time should be 1234 milliseconds
+    [info] - should have a meaningful string representation
+    [info]   + Given a time
+    [info]   + When I request its string representation
+    [info]   + Then the representation should include the elapsed time in milliseconds
+    [info] Run completed in 341 milliseconds.
+    [info] Total number of tests run: 13
+    [info] Suites: completed 3, aborted 0
+    [info] Tests: succeeded 13, failed 0, canceled 0, ignored 0, pending 0
     [info] All tests passed.
-
 
 <a name="Design"></a>
 
@@ -231,6 +245,25 @@ Example output:
   this scheduler are not really functional.  The `Cancellable.cancel()` method is a no-op and will always return false.
   This has the effect that `Cancellable.isCancelled` will always return false, too, to adhere to the `Cancellable`
   contract.
+
+
+<a name="Development"></a>
+
+# Development
+
+## Running the test spec
+
+    # Runs the tests for the main Scala version only (currently: 2.10.x)
+    $ ./sbt test
+
+    # Runs the tests for all configured Scala versions
+    $ ./sbt "+ test"
+
+
+## Publishing to SonaType
+
+    # Publishing a snapshot
+    $ ./sbt "+ publishSigned"
 
 
 <a name="License"></a>
