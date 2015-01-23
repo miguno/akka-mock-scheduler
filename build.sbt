@@ -99,8 +99,9 @@ pomExtra := (
     </license>
   </licenses>
   <scm>
-    <url>git@github.com:miguno/akka-mock-scheduler.git</url>
     <connection>scm:git:git@github.com:miguno/akka-mock-scheduler.git</connection>
+    <developerConnection>scm:git:git@github.com:miguno/akka-mock-scheduler.git</developerConnection>
+    <url>git@github.com:miguno/akka-mock-scheduler.git</url>
   </scm>
   <developers>
     <developer>
