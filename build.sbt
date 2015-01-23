@@ -90,7 +90,6 @@ publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
 
 pomExtra := (
-  <url>https://github.com/miguno/akka-mock-scheduler</url>
   <licenses>
     <license>
       <name>Apache 2</name>
