@@ -1,15 +1,27 @@
+homepage := Some(url("https://github.com/miguno/akka-mock-scheduler"))
+
+licenses := Seq("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.html"))
+
 organization := "com.miguno.akka"
 
 name := "akka-mock-scheduler"
 
-scalaVersion := "2.10.4"
-
-// https://github.com/jrudolph/sbt-dependency-graph
-net.virtualvoid.sbt.graph.Plugin.graphSettings
-
 resolvers ++= Seq(
   "typesafe-repository" at "http://repo.typesafe.com/typesafe/releases/"
 )
+
+
+// -------------------------------------------------------------------------------------------------------------------
+// Variables
+// -------------------------------------------------------------------------------------------------------------------
+
+val javaVersion = "1.7"
+val mainScalaVersion = "2.10.4"
+
+
+// -------------------------------------------------------------------------------------------------------------------
+// Dependencies
+// -------------------------------------------------------------------------------------------------------------------
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.3.6",
@@ -17,8 +29,25 @@ libraryDependencies ++= Seq(
   "org.mockito" % "mockito-all" % "1.9.5" % "test"
 )
 
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Compiler settings
+// ---------------------------------------------------------------------------------------------------------------------
+
+crossScalaVersions := Seq(mainScalaVersion, "2.11.5")
+
+scalaVersion := mainScalaVersion
+
+// https://github.com/jrudolph/sbt-dependency-graph
+
+javacOptions in Compile ++= Seq(
+  "-source", javaVersion,
+  "-target", javaVersion,
+  "-Xlint:unchecked",
+  "-Xlint:deprecation")
+
 scalacOptions ++= Seq(
-  "-target:jvm-1.7",
+  "-target:jvm-" + javaVersion,
   "-encoding", "UTF-8"
 )
 
@@ -36,11 +65,54 @@ scalacOptions in Test ~= { (options: Seq[String]) =>
   options.filterNot(_ == "-Ywarn-value-discard").filterNot(_ == "-Ywarn-dead-code" /* to fix warnings due to Mockito */)
 }
 
-scalacOptions in ScoverageTest ~= { (options: Seq[String]) =>
-  options.filterNot(_ == "-Ywarn-value-discard").filterNot(_ == "-Ywarn-dead-code" /* to fix warnings due to Mockito */)
+//scalacOptions in ScoverageTest ~= { (options: Seq[String]) =>
+//  options.filterNot(_ == "-Ywarn-value-discard").filterNot(_ == "-Ywarn-dead-code" /* to fix warnings due to Mockito */)
+//}
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Sonatype settings
+// ---------------------------------------------------------------------------------------------------------------------
+
+publishMavenStyle := true
+
+publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
 
 publishArtifact in Test := false
+
+pomIncludeRepository := { _ => false }
+
+pomExtra := (
+  <url>https://github.com/miguno/akka-mock-scheduler</url>
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>git@github.com:miguno/akka-mock-scheduler.git</url>
+    <connection>scm:git:git@github.com:miguno/akka-mock-scheduler.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>miguno</id>
+      <name>Michael G. Noll</name>
+      <url>http://www.michael-noll.com/</url>
+    </developer>
+  </developers>)
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Testing settings
+// ---------------------------------------------------------------------------------------------------------------------
 
 // Write test results to file in JUnit XML format
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/test-reports/junitxml")
@@ -60,5 +132,13 @@ testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/te
 //
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-o")
 
-// See https://github.com/scoverage/scalac-scoverage-plugin
-instrumentSettings
+// Workaround for highlighting, required for Scala versions < 2.11.2.
+// See https://github.com/scoverage/sbt-scoverage#highlighting
+ScoverageSbtPlugin.ScoverageKeys.coverageHighlighting := {
+  if (scalaBinaryVersion.value == "2.10") false else false
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Misc settings
+// ---------------------------------------------------------------------------------------------------------------------
+net.virtualvoid.sbt.graph.Plugin.graphSettings
