@@ -11,8 +11,9 @@ import scala.concurrent.duration._
  *
  * Typically this scheduler is used indirectly via a [[VirtualTime]] instance.
  *
- * Note: For simplicity reasons the [[Cancellable]] instances returned by this scheduler are not functional and will
- * throw [[NotImplementedError]] when you call their [[Cancellable.cancel()]] and [[Cancellable.isCancelled]] methods.
+ * Note: For simplicity reasons the [[Cancellable]] instances returned by this scheduler are not functional.
+ * [[Cancellable.cancel()]] is a no-op and will always return false.  This has the effect that
+ * [[Cancellable.isCancelled]] will always return false, too, to adhere to the contract of [[Cancellable]].
  *
  * @param time
  */

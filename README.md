@@ -194,8 +194,8 @@ Example output:
       and, once A has finished and without any further delay, B will be executed immediately.
 * Tasks are executed synchronously when the scheduler's `tick()` method is called.
 * For simplicity reasons the `akka.actor.Cancellable` instances returned by this scheduler are not really functional.
-  The `Cancellable.cancel()` method is a no-op and will always return false.  To adhere to the `Cancellable` contract, this
-  means that `Cancellable.isCancelled` will always return false, too.
+  The `Cancellable.cancel()` method is a no-op and will always return false.  This has the effect that
+  `Cancellable.isCancelled` will always return false, too, to adhere to the `Cancellable` contract.
 
 
 <a name="License"></a>
