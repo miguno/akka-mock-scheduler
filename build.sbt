@@ -15,6 +15,7 @@ resolvers ++= Seq(
 // Variables
 // -------------------------------------------------------------------------------------------------------------------
 
+val akkaVersion = "2.3.9"
 val javaVersion = "1.7"
 val mainScalaVersion = "2.10.4"
 
@@ -24,7 +25,7 @@ val mainScalaVersion = "2.10.4"
 // -------------------------------------------------------------------------------------------------------------------
 
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor" % "2.3.6",
+  "com.typesafe.akka" %% "akka-actor" % akkaVersion,
   "org.scalatest" %% "scalatest" % "2.2.1" % "test",
   "org.mockito" % "mockito-all" % "1.9.5" % "test"
 )
