@@ -13,7 +13,7 @@ class FakeCancellableSpec extends FunSpec with Matchers with GivenWhenThen {
       When("I cancel it")
       val result = cancellable.cancel()
 
-      Then("then it returns false")
+      Then("it returns false")
       result should be(false)
     }
 
@@ -22,7 +22,7 @@ class FakeCancellableSpec extends FunSpec with Matchers with GivenWhenThen {
       val cancellable = FakeCancellable()
 
       When("I ask whether it has been successfully cancelled")
-      Then("then it returns false")
+      Then("it returns false")
       cancellable should not be 'cancelled
     }
 
@@ -33,7 +33,7 @@ class FakeCancellableSpec extends FunSpec with Matchers with GivenWhenThen {
       cancellable.cancel()
 
       When("I ask whether it has been successfully cancelled")
-      Then("then it returns false")
+      Then("it returns false")
       cancellable should not be 'cancelled
     }
 
