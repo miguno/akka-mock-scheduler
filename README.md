@@ -1,4 +1,4 @@
-# akka-mock-scheduler [![Build Status](https://travis-ci.org/miguno/akka-mock-scheduler.svg?branch=develop)](https://travis-ci.org/miguno/akka-mock-scheduler) [![Coverage Status](https://coveralls.io/repos/miguno/akka-mock-scheduler/badge.svg?branch=develop)](https://coveralls.io/r/miguno/akka-mock-scheduler?branch=develop)
+# akka-mock-scheduler [![Build Status](https://travis-ci.org/miguno/akka-mock-scheduler.svg?branch=develop)](https://travis-ci.org/miguno/akka-mock-scheduler) [![Coverage Status](https://coveralls.io/repos/miguno/akka-mock-scheduler/badge.svg?branch=develop)](https://coveralls.io/r/miguno/akka-mock-scheduler?branch=develop) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.miguno.akka/akka-mock-scheduler_2.10/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.miguno.akka/akka-mock-scheduler)
 
 A mock Akka scheduler to simplify testing scheduler-dependent code.
 
