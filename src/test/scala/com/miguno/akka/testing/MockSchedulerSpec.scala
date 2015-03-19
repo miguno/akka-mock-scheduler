@@ -104,10 +104,12 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
       time.scheduler.scheduleOnce(delay)(counter.compareAndSet(0, 1))
       And("I then schedule a one-time task B to run at the same time as A")
       time.scheduler.scheduleOnce(delay)(counter.compareAndSet(1, 42))
+      And("I then schedule a one-time task C to run at the same time as B")
+      time.scheduler.scheduleOnce(delay)(counter.compareAndSet(42, 80))
 
-      Then("A should run before B")
+      Then("A should run before B and B should run before C")
       time.advance(delay)
-      counter.get should be(42)
+      counter.get should be(80)
     }
 
     it("should, for tasks that are scheduled for the same time, run one-time tasks before subsequent runs of recurring tasks") {
