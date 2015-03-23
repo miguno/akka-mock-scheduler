@@ -14,12 +14,11 @@ import scala.concurrent.duration._
  * Note: For simplicity reasons the [[Cancellable]] instances returned by this scheduler are not functional.
  * [[Cancellable.cancel( )]] is a no-op and will always return false.  This has the effect that
  * [[Cancellable.isCancelled]] will always return false, too, to adhere to the contract of [[Cancellable]].
- *
- * @param time
  */
 class MockScheduler(time: VirtualTime) extends Scheduler {
 
   private[this] val lock = new Object
+  private[this] var id = 0L
 
   // Tasks are sorted ascendingly by execution time (head is the next task to be executed)
   private[this] val tasks = new collection.mutable.PriorityQueue[Task]()
@@ -40,7 +39,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
         val head = tasks.dequeue()
         head.runnable.run()
         head.interval match {
-          case Some(interval) => tasks += new Task(head.delay + interval, head.runnable, head.interval)
+          case Some(interval) => tasks += new Task(head.delay + interval, head.id, head.runnable, head.interval)
           case None =>
         }
       }
@@ -57,21 +56,23 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
 
   private def addToTasks(delay: FiniteDuration, runnable: Runnable, interval: Option[FiniteDuration]): Cancellable =
     lock synchronized {
+      id += 1
       val startTime = time.elapsed + delay
-      tasks += new Task(startTime, runnable, interval)
+      tasks += new Task(startTime, id, runnable, interval)
       FakeCancellable()
     }
 
   override val maxFrequency: Double = 1.second / 1.millis
 
-  private case class Task(delay: FiniteDuration, runnable: Runnable, interval: Option[FiniteDuration])
+  private case class Task(delay: FiniteDuration, id: Long, runnable: Runnable, interval: Option[FiniteDuration])
       extends Ordered[Task] {
 
     def compare(t: Task): Int =
-      if (delay == t.delay) 0
-      else if (delay > t.delay) -1
-      else 1
-
+      if (delay > t.delay) -1
+      else if (delay < t.delay) 1
+      else if (id > t.id) -1
+      else if (id < t.id) 1
+      else 0
   }
 
 }

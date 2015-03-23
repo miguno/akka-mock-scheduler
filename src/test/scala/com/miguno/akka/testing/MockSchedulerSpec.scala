@@ -66,7 +66,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
       counter.get should be(103)
     }
 
-    it("should run tasks in order") {
+    it("should run tasks with different delays in order") {
       Given("a time with a scheduler")
       val time = new VirtualTime
       And("and an execution context")
@@ -92,7 +92,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
       counterB.get should be(1)
     }
 
-    it("should run one-time tasks in order of their registration with the scheduler") {
+    it("should run tasks that are scheduled for the same time in order of their registration with the scheduler") {
       Given("a time with a scheduler")
       val time = new VirtualTime
       And("and an execution context")
@@ -102,31 +102,14 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
       val counter = new AtomicInteger(0)
       val delay = 20.millis
       time.scheduler.scheduleOnce(delay)(counter.compareAndSet(0, 1))
-      And("I then schedule a one-time task B to run at the same time as A")
-      time.scheduler.scheduleOnce(delay)(counter.compareAndSet(1, 42))
+      And("I then schedule a recurring task B whose initial run is scheduled at the same time as A")
+      time.scheduler.schedule(delay, delay)(counter.compareAndSet(1, 42))
+      And("I then schedule a one-time task C to run at the same time as A")
+      time.scheduler.scheduleOnce(delay)(counter.compareAndSet(42, 80))
 
-      Then("A should run before B")
+      Then("A should run before B, and B should run before C")
       time.advance(delay)
-      counter.get should be(42)
-    }
-
-    it("should, for tasks that are scheduled for the same time, run one-time tasks before subsequent runs of recurring tasks") {
-      Given("a time with a scheduler")
-      val time = new VirtualTime
-      And("and an execution context")
-      import scala.concurrent.ExecutionContext.Implicits.global
-
-      When("I schedule a recurring task A")
-      val counter = new AtomicInteger(0)
-      val delay = 20.millis
-      time.scheduler.schedule(delay, delay)(counter.getAndIncrement)
-      And("I schedule two one-time tasks B and C, which are scheduled at the same time as A's recurring runs")
-      time.scheduler.scheduleOnce(delay * 2)(counter.compareAndSet(1, 10))
-      time.scheduler.scheduleOnce(delay * 3)(counter.compareAndSet(11, 20))
-
-      Then("B and C should happen before the recurring runs of A")
-      time.advance(delay * 3)
-      counter.get should be(21)
+      counter.get should be(80)
     }
 
     it("should support recursive scheduling") {

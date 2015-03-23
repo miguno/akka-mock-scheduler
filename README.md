@@ -238,9 +238,14 @@ Example output:
 
 * If you call `time.advance()`, then the scheduler will run any tasks that need to be executed in "one big swing":
   there will be no delay in-between tasks runs, however the execution _order_ of the tasks is honored.
-    * Example: `time.elapsed` is `0 millis`.  Tasks `A` and `B` are scheduled to run with a delay of `10 millis` and
+  Note: If tasks are scheduled to run at the same time, then they will be run in the order of their registration with
+  the scheduler.
+    * Example 1: `time.elapsed` is `0 millis`.  Tasks `A` and `B` are scheduled to run with a delay of `10 millis` and
       `20 millis`, respectively.  If you now `advance()` the time straight to `50 millis`, then A will be executed first
       and, once A has finished and without any further delay, B will be executed immediately.
+    * Example 2: `time.elapsed` is `0 millis`.  First, task `C` is scheduled to run with a delay of `300 millis`, then
+      task `D` is scheduled to run with a delay of `300 millis`, too.  If you now `advance()` the time to `300 millis`
+      or more, then tasks `C` will always be run before task `D` (because `C` was registered first).
 * Tasks are executed synchronously when the scheduler's `tick()` method is called.
 * For simplicity reasons the
   [akka.actor.Cancellable](http://doc.akka.io/api/akka/2.3.9/index.html#akka.actor.Cancellable) instances returned by
