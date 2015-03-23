@@ -245,7 +245,7 @@ Example output:
       and, once A has finished and without any further delay, B will be executed immediately.
     * Example 2: `time.elapsed` is `0 millis`.  First, task `C` is scheduled to run with a delay of `300 millis`, then
       task `D` is scheduled to run with a delay of `300 millis`, too.  If you now `advance()` the time to `300 millis`
-      or more, then tasks `C` will always be run before task `D` (because `C` was registered first).
+      or more, then task `C` will always be run before task `D` (because `C` was registered first).
 * Tasks are executed synchronously when the scheduler's `tick()` method is called.
 * For simplicity reasons the
   [akka.actor.Cancellable](http://doc.akka.io/api/akka/2.3.9/index.html#akka.actor.Cancellable) instances returned by
