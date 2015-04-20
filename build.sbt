@@ -39,8 +39,6 @@ crossScalaVersions := Seq(mainScalaVersion, "2.11.5")
 
 scalaVersion := mainScalaVersion
 
-// https://github.com/jrudolph/sbt-dependency-graph
-
 javacOptions in Compile ++= Seq(
   "-source", javaVersion,
   "-target", javaVersion,
@@ -135,4 +133,5 @@ ScoverageSbtPlugin.ScoverageKeys.coverageHighlighting := {
 // ---------------------------------------------------------------------------------------------------------------------
 // Misc settings
 // ---------------------------------------------------------------------------------------------------------------------
+// https://github.com/jrudolph/sbt-dependency-graph
 net.virtualvoid.sbt.graph.Plugin.graphSettings
