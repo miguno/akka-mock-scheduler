@@ -13,7 +13,6 @@ import scala.concurrent.duration._
  */
 class MockScheduler(time: VirtualTime) extends Scheduler {
 
-  private[this] val lock = new Object
   private[this] var id = 0L
 
   // Tasks are sorted ascendingly by execution time (head is the next task to be executed)
@@ -29,8 +28,8 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
    * Implementation detail:  If you are using this scheduler indirectly via a [[VirtualTime]] instance, then this method
    * will be called automatically by the [[VirtualTime]] instance, and you should not manually call it.
    */
-  def tick(): Unit = {
-    lock synchronized {
+  def tick(): Unit =
+    synchronized {
       while (tasks.nonEmpty && tasks.head.delay <= time.elapsed) {
         val head = tasks.dequeue()
         if (!head.isCancelled) {
@@ -42,7 +41,6 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
         }
       }
     }
-  }
 
   override def scheduleOnce(delay: FiniteDuration, runnable: Runnable)
                            (implicit executor: ExecutionContext): Cancellable =
@@ -53,7 +51,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
     addToTasks(initialDelay, runnable, Option(interval))
 
   private def addToTasks(delay: FiniteDuration, runnable: Runnable, interval: Option[FiniteDuration]): Cancellable =
-    lock synchronized {
+    synchronized {
       id += 1
       val startTime = time.elapsed + delay
       val task = new Task(startTime, id, runnable, interval)
@@ -66,7 +64,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
   private case class Task(delay: FiniteDuration, id: Long, runnable: Runnable, interval: Option[FiniteDuration])
       extends Ordered[Task] {
 
-    @volatile var isCancelled = false
+    var isCancelled = false
 
     def compare(t: Task): Int =
       if (delay > t.delay) -1
@@ -79,10 +77,11 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
 
   private case class MockCancellable(task: Task) extends Cancellable {
 
-    override def cancel(): Boolean = {
-      task.isCancelled = true
-      true
-    }
+    override def cancel(): Boolean =
+      MockScheduler.this synchronized {
+        task.isCancelled = true
+        true
+      }
 
     override def isCancelled: Boolean = task.isCancelled
 
