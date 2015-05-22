@@ -138,7 +138,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
       And("and an execution context")
       import scala.concurrent.ExecutionContext.Implicits.global
 
-      When("I schedule a one-time task A")
+      When("I schedule a one-time task")
       val counter = new AtomicInteger(0)
       val scheduledIncrement = time.scheduler.scheduleOnce(5.millis)(counter.getAndIncrement)
 
