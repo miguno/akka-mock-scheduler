@@ -26,8 +26,7 @@ val mainScalaVersion = "2.10.4"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
-  "org.mockito" % "mockito-all" % "1.10.19" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )
 
 
