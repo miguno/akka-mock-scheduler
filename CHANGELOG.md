@@ -1,3 +1,10 @@
+# 0.4.0 (unreleased)
+
+IMPROVEMENTS
+
+* Scheduled tasks are now cancellable. (thanks aosagie)
+
+
 # 0.3.0 (March 23, 2015)
 
 BREAKING CHANGES / BUG FIXES
