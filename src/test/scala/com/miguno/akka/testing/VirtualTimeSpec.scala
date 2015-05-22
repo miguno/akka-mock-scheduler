@@ -41,6 +41,17 @@ class VirtualTimeSpec extends FunSpec with Matchers with GivenWhenThen {
       time.elapsed should be(1234.millis)
     }
 
+    it("should not accept a step that is less than 1 millisecond") {
+      Given("a time")
+      val time = new VirtualTime
+
+      When("I attempt to advance the time by less than 1 millisecond")
+      Then("this fails with an exception")
+      an [IllegalArgumentException] should be thrownBy time.advance(0.millis)
+      an [IllegalArgumentException] should be thrownBy time.advance(1.microsecond)
+      an [IllegalArgumentException] should be thrownBy time.advance(999.microsecond)
+    }
+
     it("should have a meaningful string representation") {
       Given("a time")
       val time = new VirtualTime
