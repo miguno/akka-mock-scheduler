@@ -143,9 +143,11 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
       val scheduledIncrement = time.scheduler.scheduleOnce(5.millis)(counter.getAndIncrement)
 
       Then("the task should not run if it's cancelled")
-      scheduledIncrement.cancel()
+      val cancelled = scheduledIncrement.cancel()
       time.advance(10.millis)
       counter.get should be(0)
+      cancelled should be(true)
+      scheduledIncrement.cancel() should be(false) //Subsequent cancels of an already cancelled task should return false
     }
 
   }

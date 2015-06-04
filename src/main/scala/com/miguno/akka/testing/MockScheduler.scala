@@ -79,8 +79,9 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
 
     override def cancel(): Boolean =
       MockScheduler.this synchronized {
+        val wasCancelled = task.isCancelled
         task.isCancelled = true
-        true
+        !wasCancelled
       }
 
     override def isCancelled: Boolean = task.isCancelled
