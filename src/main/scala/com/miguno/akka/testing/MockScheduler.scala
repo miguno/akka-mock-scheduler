@@ -10,14 +10,9 @@ import scala.concurrent.duration._
  * Tasks are executed synchronously when `tick` is called.
  *
  * Typically this scheduler is used indirectly via a [[VirtualTime]] instance.
- *
- * Note: For simplicity reasons the [[Cancellable]] instances returned by this scheduler are not functional.
- * [[Cancellable.cancel( )]] is a no-op and will always return false.  This has the effect that
- * [[Cancellable.isCancelled]] will always return false, too, to adhere to the contract of [[Cancellable]].
  */
 class MockScheduler(time: VirtualTime) extends Scheduler {
 
-  private[this] val lock = new Object
   private[this] var id = 0L
 
   // Tasks are sorted ascendingly by execution time (head is the next task to be executed)
@@ -33,18 +28,19 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
    * Implementation detail:  If you are using this scheduler indirectly via a [[VirtualTime]] instance, then this method
    * will be called automatically by the [[VirtualTime]] instance, and you should not manually call it.
    */
-  def tick(): Unit = {
-    lock synchronized {
+  def tick(): Unit =
+    synchronized {
       while (tasks.nonEmpty && tasks.head.delay <= time.elapsed) {
         val head = tasks.dequeue()
-        head.runnable.run()
-        head.interval match {
-          case Some(interval) => tasks += new Task(head.delay + interval, head.id, head.runnable, head.interval)
-          case None =>
+        if (!head.isCancelled) {
+          head.runnable.run()
+          head.interval match {
+            case Some(interval) => tasks += new Task(head.delay + interval, head.id, head.runnable, head.interval)
+            case None =>
+          }
         }
       }
     }
-  }
 
   override def scheduleOnce(delay: FiniteDuration, runnable: Runnable)
                            (implicit executor: ExecutionContext): Cancellable =
@@ -55,11 +51,12 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
     addToTasks(initialDelay, runnable, Option(interval))
 
   private def addToTasks(delay: FiniteDuration, runnable: Runnable, interval: Option[FiniteDuration]): Cancellable =
-    lock synchronized {
+    synchronized {
       id += 1
       val startTime = time.elapsed + delay
-      tasks += new Task(startTime, id, runnable, interval)
-      FakeCancellable()
+      val task = new Task(startTime, id, runnable, interval)
+      tasks += task
+      MockCancellable(task)
     }
 
   override val maxFrequency: Double = 1.second / 1.millis
@@ -67,12 +64,28 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
   private case class Task(delay: FiniteDuration, id: Long, runnable: Runnable, interval: Option[FiniteDuration])
       extends Ordered[Task] {
 
+    var isCancelled = false
+
     def compare(t: Task): Int =
       if (delay > t.delay) -1
       else if (delay < t.delay) 1
       else if (id > t.id) -1
       else if (id < t.id) 1
       else 0
+
+  }
+
+  private case class MockCancellable(task: Task) extends Cancellable {
+
+    override def cancel(): Boolean =
+      MockScheduler.this synchronized {
+        val wasCancelled = task.isCancelled
+        task.isCancelled = true
+        !wasCancelled
+      }
+
+    override def isCancelled: Boolean = task.isCancelled
+
   }
 
 }
