@@ -73,6 +73,19 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
       else if (id > t.id) -1
       else if (id < t.id) 1
       else 0
+
+    override def toString: String = {
+      val intervalStr = interval.map(i => s" and interval $i").getOrElse("")
+
+      s"Task #$id with delay $delay$intervalStr"
+    }
+
+  }
+
+  override def toString: String = {
+    lock synchronized {
+      s"MockScheduler(${tasks.mkString(", ")})"
+    }
   }
 
 }
