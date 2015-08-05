@@ -17,7 +17,6 @@ import scala.concurrent.duration._
  */
 class MockScheduler(time: VirtualTime) extends Scheduler {
 
-  private[this] val lock = new Object
   private[this] var id = 0L
 
   // Tasks are sorted ascendingly by execution time (head is the next task to be executed)
@@ -34,7 +33,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
    * will be called automatically by the [[VirtualTime]] instance, and you should not manually call it.
    */
   def tick(): Unit = {
-    lock synchronized {
+    time.lock synchronized {
       while (tasks.nonEmpty && tasks.head.delay <= time.elapsed) {
         val head = tasks.dequeue()
         head.runnable.run()
@@ -55,7 +54,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
     addToTasks(initialDelay, runnable, Option(interval))
 
   private def addToTasks(delay: FiniteDuration, runnable: Runnable, interval: Option[FiniteDuration]): Cancellable =
-    lock synchronized {
+    time.lock synchronized {
       id += 1
       val startTime = time.elapsed + delay
       tasks += new Task(startTime, id, runnable, interval)
