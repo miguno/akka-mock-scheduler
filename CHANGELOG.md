@@ -1,3 +1,10 @@
+# 0.3.1 (August 05, 2015)
+
+BUG FIXES
+
+* Fix deadlock involving `MockScheduler#schedule()` and `VirtualTime#advance()`. [GH-4] (thanks emrecelikten)
+
+
 # 0.3.0 (March 23, 2015)
 
 BREAKING CHANGES / BUG FIXES

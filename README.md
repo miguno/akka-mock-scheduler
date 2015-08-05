@@ -58,10 +58,10 @@ When using a **release**:
 
 ```scala
 // Scala 2.10
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.10" % "0.3.0")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.10" % "0.3.1")
 
 // Scala 2.11
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.3.0")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.3.1")
 ```
 
 When using a **snapshot**:
