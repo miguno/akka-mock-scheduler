@@ -131,8 +131,3 @@ testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-o")
 ScoverageSbtPlugin.ScoverageKeys.coverageHighlighting := {
   if (scalaBinaryVersion.value == "2.10") false else false
 }
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Misc settings
-// ---------------------------------------------------------------------------------------------------------------------
-net.virtualvoid.sbt.graph.Plugin.graphSettings
