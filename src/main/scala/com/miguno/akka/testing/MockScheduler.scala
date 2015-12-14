@@ -10,17 +10,13 @@ import scala.concurrent.duration._
  * Tasks are executed synchronously when `tick` is called.
  *
  * Typically this scheduler is used indirectly via a [[VirtualTime]] instance.
- *
- * Note: For simplicity reasons the [[Cancellable]] instances returned by this scheduler are not functional.
- * [[Cancellable.cancel( )]] is a no-op and will always return false.  This has the effect that
- * [[Cancellable.isCancelled]] will always return false, too, to adhere to the contract of [[Cancellable]].
  */
 class MockScheduler(time: VirtualTime) extends Scheduler {
 
   private[this] var id = 0L
 
   // Tasks are sorted ascendingly by execution time (head is the next task to be executed)
-  private[this] val tasks = new collection.mutable.PriorityQueue[Task]()
+  private[this] var tasks = new collection.mutable.PriorityQueue[Task]()
 
   /**
    * Runs any tasks that are due at this point in time.  This includes running recurring tasks multiple times if needed.
@@ -57,21 +53,17 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
     time.lock synchronized {
       id += 1
       val startTime = time.elapsed + delay
-      tasks += new Task(startTime, id, runnable, interval)
-      FakeCancellable()
+      val task = new Task(startTime, id, runnable, interval)
+      tasks += task
+      MockCancellable(this, task)
     }
+  
+  private[testing] def cancelTask(task: Task): Unit = {
+    time.lock synchronized {
+      tasks = tasks.filterNot { x => x == task }
+    }
+  }
 
   override val maxFrequency: Double = 1.second / 1.millis
-
-  private case class Task(delay: FiniteDuration, id: Long, runnable: Runnable, interval: Option[FiniteDuration])
-      extends Ordered[Task] {
-
-    def compare(t: Task): Int =
-      if (delay > t.delay) -1
-      else if (delay < t.delay) 1
-      else if (id > t.id) -1
-      else if (id < t.id) 1
-      else 0
-  }
 
 }

@@ -1,6 +1,6 @@
 package com.miguno.akka.testing
 
-import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FunSpec, GivenWhenThen, Matchers }
 
 import scala.concurrent.duration._
 
@@ -53,6 +53,16 @@ class VirtualTimeSpec extends FunSpec with Matchers with GivenWhenThen {
       Then("the representation should include the elapsed time in milliseconds")
       s should be(s"VirtualTime(${anyStep.toMillis})")
 
+    }
+
+    it("should enforce a minimum advancemet of 1 miliseconds") {
+      Given("a time")
+      val time = new VirtualTime
+
+      Then("it will throw an excepiton if time is advanced by less than 1 millisecond")
+      intercept[IllegalArgumentException] {
+        time.advance(0.millis)
+      }
     }
 
   }
