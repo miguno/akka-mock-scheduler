@@ -1,3 +1,13 @@
+# 0.4.0 (December 14, 2015)
+
+IMPROVEMENTS
+
+* [GH-5] Tasks are now cancellable.  When scheduling a task via e.g. `scheduler.scheduleOnce()`, the returned
+  [Cancellable](http://doc.akka.io/api/akka/2.3.9/index.html#akka.actor.Cancellable) can now be cancelled;
+  if it is cancelled before its execution time, then the `MockScheduler` will not run the task.
+  (thanks mmacfadden)
+
+
 # 0.3.1 (August 05, 2015)
 
 BUG FIXES
