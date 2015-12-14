@@ -34,6 +34,9 @@ private[testing] case class MockCancellable(scheduler: MockScheduler, task: Task
     * @return Returns true if this cancellable has been canceled, false
     *         otherwise.
     */
-  override def isCancelled: Boolean = canceled
+  override def isCancelled: Boolean =
+    this synchronized {
+      canceled
+    }
 
 }
