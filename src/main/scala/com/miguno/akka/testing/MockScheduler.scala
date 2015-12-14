@@ -6,11 +6,11 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
 
 /**
- * A scheduler whose `tick` can be triggered manually, which is helpful for testing purposes.
- * Tasks are executed synchronously when `tick` is called.
- *
- * Typically this scheduler is used indirectly via a [[VirtualTime]] instance.
- */
+  * A scheduler whose `tick` can be triggered manually, which is helpful for testing purposes.
+  * Tasks are executed synchronously when `tick` is called.
+  *
+  * Typically this scheduler is used indirectly via a [[VirtualTime]] instance.
+  */
 class MockScheduler(time: VirtualTime) extends Scheduler {
 
   private[this] var id = 0L
@@ -19,15 +19,15 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
   private[this] var tasks = new collection.mutable.PriorityQueue[Task]()
 
   /**
-   * Runs any tasks that are due at this point in time.  This includes running recurring tasks multiple times if needed.
-   * The execution of tasks happens synchronously in the calling thread.
-   *
-   * Tasks are executed in order based on their scheduled execution time.  We do not define the execution ordering of
-   * tasks that are scheduled for the same time.
-   *
-   * Implementation detail:  If you are using this scheduler indirectly via a [[VirtualTime]] instance, then this method
-   * will be called automatically by the [[VirtualTime]] instance, and you should not manually call it.
-   */
+    * Runs any tasks that are due at this point in time.  This includes running recurring tasks multiple times if needed.
+    * The execution of tasks happens synchronously in the calling thread.
+    *
+    * Tasks are executed in order based on their scheduled execution time.  We do not define the execution ordering of
+    * tasks that are scheduled for the same time.
+    *
+    * Implementation detail:  If you are using this scheduler indirectly via a [[VirtualTime]] instance, then this method
+    * will be called automatically by the [[VirtualTime]] instance, and you should not manually call it.
+    */
   def tick(): Unit = {
     time.lock synchronized {
       while (tasks.nonEmpty && tasks.head.delay <= time.elapsed) {
@@ -57,7 +57,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
       tasks += task
       MockCancellable(this, task)
     }
-  
+
   private[testing] def cancelTask(task: Task): Unit = {
     time.lock synchronized {
       tasks = tasks.filterNot { x => x == task }

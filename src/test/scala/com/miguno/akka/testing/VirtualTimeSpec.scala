@@ -1,6 +1,6 @@
 package com.miguno.akka.testing
 
-import org.scalatest.{ FunSpec, GivenWhenThen, Matchers }
+import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 
 import scala.concurrent.duration._
 
