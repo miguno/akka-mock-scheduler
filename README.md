@@ -58,10 +58,10 @@ When using a **release**:
 
 ```scala
 // Scala 2.10
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.10" % "0.3.1")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.10" % "0.4.0")
 
 // Scala 2.11
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.3.1")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.4.0")
 ```
 
 When using a **snapshot**:
@@ -70,10 +70,10 @@ When using a **snapshot**:
 resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
 
 // Scala 2.10
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.10" % "0.3.2-SNAPSHOT")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.10" % "0.4.1-SNAPSHOT")
 
 // Scala 2.11
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.3.2-SNAPSHOT")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.4.1-SNAPSHOT")
 ```
 
 
