@@ -15,7 +15,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
 
   private[this] var id = 0L
 
-  // Tasks are sorted ascendingly by execution time (head is the next task to be executed)
+  // Tasks are sorted descendingly by execution priority, i.e. head is the largest element and thus executed next.
   private[this] var tasks = new collection.mutable.PriorityQueue[Task]()
 
   /**

@@ -11,7 +11,7 @@ class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with 
       Given("an instance")
       val cancellable = MockCancellable(mock[MockScheduler], mock[Task])
 
-      When("I cancel the first time it")
+      When("I cancel it the first time")
       val result = cancellable.cancel()
 
       Then("it returns true")
@@ -22,7 +22,7 @@ class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with 
       Given("an instance")
       val cancellable = MockCancellable(mock[MockScheduler], mock[Task])
 
-      When("I cancel the second time it")
+      When("I cancel it the second time")
       cancellable.cancel()
       val result = cancellable.cancel()
 
@@ -34,7 +34,7 @@ class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with 
       Given("an instance")
       val cancellable = MockCancellable(mock[MockScheduler], mock[Task])
 
-      When("I ask whether it has been successfully cancelled")
+      When("I ask whether it has been cancelled")
       Then("it returns false")
       cancellable.isCancelled should be(false)
     }
@@ -46,7 +46,7 @@ class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with 
       And("the instance was cancelled")
       cancellable.cancel()
 
-      When("I ask whether it has been successfully cancelled")
+      When("I ask whether it has been cancelled")
       Then("it returns true")
       cancellable.isCancelled should be(true)
     }

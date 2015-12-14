@@ -123,7 +123,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
       time.scheduler.scheduleOnce(10.millis)(time.scheduler.scheduleOnce(20.millis)(counter.getAndIncrement))
       And("I advance the time so that A was already run (and thus B is now registered with the scheduler)")
       time.advance(50.millis)
-      counter.get should be(0) // <<< the scheduler has only ticked once at this point, so B will have been executed yet
+      counter.get should be(0) // <<< the scheduler has only ticked once at this point, so B will not have been executed yet
 
       Then("B should be run with the configured delay (which will happen in one of the next ticks of the scheduler)")
       time.advance(19.millis)
@@ -138,16 +138,16 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
       And("and an execution context")
       import scala.concurrent.ExecutionContext.Implicits.global
 
-      When("I schedule a one-time task A")
+      When("I schedule a one-time task")
+      val delay = 5.millis
       val counter = new AtomicInteger(0)
-      val scheduledIncrement = time.scheduler.scheduleOnce(5.millis)(counter.getAndIncrement)
+      val scheduledIncrement = time.scheduler.scheduleOnce(delay)(counter.getAndIncrement)
+      And("I cancel the task before its execution time")
+      scheduledIncrement.cancel()
+      time.advance(delay)
 
-      Then("the task should not run if it's cancelled")
-      val cancelled = scheduledIncrement.cancel()
-      time.advance(10.millis)
+      Then("the task should not run")
       counter.get should be(0)
-      cancelled should be(true)
-      scheduledIncrement.cancel() should be(false) //Subsequent cancels of an already cancelled task should return false
     }
   }
 
