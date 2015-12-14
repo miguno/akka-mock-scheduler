@@ -148,21 +148,25 @@ the mock scheduler and virtual time work:
 
 Example output:
 
-    [info] FakeCancellableSpec:
-    [info] FakeCancellable
-    [info] - should return false when cancelled
+    [info] MockCancellableSpec:
+    [info] MockCancellable
+    [info] - should return true when cancelled the first time
     [info]   + Given an instance
-    [info]   + When I cancel it
-    [info]   + Then then it returns false
+    [info]   + When I cancel it the first time
+    [info]   + Then it returns true
+    [info] - should return false when cancelled the second time
+    [info]   + Given an instance
+    [info]   + When I cancel it the second time
+    [info]   + Then it returns false
     [info] - isCancelled should return false when cancel was not called yet
     [info]   + Given an instance
-    [info]   + When I ask whether it has been successfully cancelled
-    [info]   + Then then it returns false
-    [info] - isCancelled should return false when cancel was called already
+    [info]   + When I ask whether it has been cancelled
+    [info]   + Then it returns false
+    [info] - isCancelled should return true when cancel was called already
     [info]   + Given an instance
     [info]   + And the instance was cancelled
-    [info]   + When I ask whether it has been successfully cancelled
-    [info]   + Then then it returns false
+    [info]   + When I ask whether it has been cancelled
+    [info]   + Then it returns true
     [info] MockSchedulerSpec:
     [info] MockScheduler
     [info] - should run a one-time task once
@@ -183,31 +187,48 @@ Example output:
     [info]   + And it should not run again before its next interval
     [info]   + And it should run again at its next interval (run #3)
     [info]   + And it should have run 103 times after the initial delay and 102 intervals
-    [info] - should run tasks in order
+    [info] - should run tasks with different delays in order
     [info]   + Given a time with a scheduler
     [info]   + And and an execution context
     [info]   + When I schedule a recurring task A
     [info]   + And I schedule a one-time task B to run when A has already been run a couple of times
     [info]   + Then A should run before B
     [info]   + And A should continue to run after B finished
-    [info] - should run one-time tasks in order of their registration with the scheduler
+    [info] - should run tasks that are scheduled for the same time in order of their registration with the scheduler
     [info]   + Given a time with a scheduler
     [info]   + And and an execution context
     [info]   + When I schedule a one-time task A
-    [info]   + And I then schedule a one-time task B to run at the same time as A
-    [info]   + Then A should run before B
-    [info] - should, for tasks that are scheduled for the same time, run one-time tasks before subsequent runs of recurring tasks
-    [info]   + Given a time with a scheduler
-    [info]   + And and an execution context
-    [info]   + When I schedule a recurring task A
-    [info]   + And I schedule two one-time tasks B and C, which are scheduled at the same time as A's recurring runs
-    [info]   + Then B and C should happen before the recurring runs of A
+    [info]   + And I then schedule a recurring task B whose initial run is scheduled at the same time as A
+    [info]   + And I then schedule a one-time task C to run at the same time as A
+    [info]   + Then A should run before B, and B should run before C
     [info] - should support recursive scheduling
     [info]   + Given a time with a scheduler
     [info]   + And and an execution context
     [info]   + When I schedule a task A that schedules another task B
     [info]   + And I advance the time so that A was already run (and thus B is now registered with the scheduler)
     [info]   + Then B should be run with the configured delay (which will happen in one of the next ticks of the scheduler)
+    [info] - should not run a cancelled task
+    [info]   + Given a time with a scheduler
+    [info]   + And and an execution context
+    [info]   + When I schedule a one-time task
+    [info]   + And I cancel the task before its execution time
+    [info]   + Then the task should not run
+    [info] TaskSpec:
+    [info] Task
+    [info] - a task is smaller than another task with a larger delay
+    [info]   + Given an instance
+    [info]   + When compared to a second instance that runs later
+    [info]   + Then the first instance is greater than the second
+    [info]   + And the second instance is smaller than the first
+    [info] - for two tasks with equal delays, the one with the smaller id is less than the other
+    [info]   + Given an instance
+    [info]   + When compared to second instance with a larger id
+    [info]   + Then the first instance is greater than the second
+    [info]   + And the second instance is smaller than the first
+    [info] - tasks with equal delays and equal ids are equal
+    [info]   + Given an instance
+    [info]   + When compared to another with the same delay and id
+    [info]   + Then it returns true
     [info] VirtualTimeSpec:
     [info] VirtualTime
     [info] - should start at time zero
@@ -226,11 +247,15 @@ Example output:
     [info]   + Given a time
     [info]   + When I request its string representation
     [info]   + Then the representation should include the elapsed time in milliseconds
-    [info] Run completed in 341 milliseconds.
-    [info] Total number of tests run: 13
-    [info] Suites: completed 3, aborted 0
-    [info] Tests: succeeded 13, failed 0, canceled 0, ignored 0, pending 0
+    [info] - should enforce a minimum advancemet of 1 miliseconds
+    [info]   + Given a time
+    [info]   + Then it will throw an excepiton if time is advanced by less than 1 millisecond
+    [info] Run completed in 410 milliseconds.
+    [info] Total number of tests run: 18
+    [info] Suites: completed 4, aborted 0
+    [info] Tests: succeeded 18, failed 0, canceled 0, ignored 0, pending 0
     [info] All tests passed.
+
 
 <a name="Design"></a>
 
@@ -247,11 +272,6 @@ Example output:
       task `D` is scheduled to run with a delay of `300 millis`, too.  If you now `advance()` the time to `300 millis`
       or more, then task `C` will always be run before task `D` (because `C` was registered first).
 * Tasks are executed synchronously when the scheduler's `tick()` method is called.
-* For simplicity reasons the
-  [akka.actor.Cancellable](http://doc.akka.io/api/akka/2.3.9/index.html#akka.actor.Cancellable) instances returned by
-  this scheduler are not really functional.  The `Cancellable.cancel()` method is a no-op and will always return false.
-  This has the effect that `Cancellable.isCancelled` will always return false, too, to adhere to the `Cancellable`
-  contract.
 
 
 <a name="Development"></a>
