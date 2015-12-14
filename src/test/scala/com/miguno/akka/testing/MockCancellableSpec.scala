@@ -3,9 +3,9 @@ package com.miguno.akka.testing
 import org.scalatest.mock.MockitoSugar
 import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 
-class FakeCancellableSpec extends FunSpec with Matchers with GivenWhenThen with MockitoSugar {
+class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with MockitoSugar {
 
-  describe("FakeCancellable") {
+  describe("MockCancellable") {
 
     it("should return true when cancelled the first time") {
       Given("an instance")
