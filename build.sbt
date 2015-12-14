@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
 // Compiler settings
 // ---------------------------------------------------------------------------------------------------------------------
 
-crossScalaVersions := Seq(mainScalaVersion, "2.11.6")
+crossScalaVersions := Seq(mainScalaVersion, "2.11.7")
 
 scalaVersion := mainScalaVersion
 
