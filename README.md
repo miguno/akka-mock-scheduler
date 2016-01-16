@@ -247,9 +247,9 @@ Example output:
     [info]   + Given a time
     [info]   + When I request its string representation
     [info]   + Then the representation should include the elapsed time in milliseconds
-    [info] - should enforce a minimum advancemet of 1 miliseconds
+    [info] - should enforce a minimum advancement of 1 miliseconds
     [info]   + Given a time
-    [info]   + Then it will throw an excepiton if time is advanced by less than 1 millisecond
+    [info]   + Then it will throw an exception if time is advanced by less than 1 millisecond
     [info] Run completed in 410 milliseconds.
     [info] Total number of tests run: 18
     [info] Suites: completed 4, aborted 0
