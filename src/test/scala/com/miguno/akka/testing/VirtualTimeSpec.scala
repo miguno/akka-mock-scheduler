@@ -55,11 +55,11 @@ class VirtualTimeSpec extends FunSpec with Matchers with GivenWhenThen {
 
     }
 
-    it("should enforce a minimum advancemet of 1 miliseconds") {
+    it("should enforce a minimum advancement of 1 miliseconds") {
       Given("a time")
       val time = new VirtualTime
 
-      Then("it will throw an excepiton if time is advanced by less than 1 millisecond")
+      Then("it will throw an exception if time is advanced by less than 1 millisecond")
       intercept[IllegalArgumentException] {
         time.advance(0.millis)
       }
