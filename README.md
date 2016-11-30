@@ -327,7 +327,7 @@ See [CHANGELOG](CHANGELOG.md).
 
 # License
 
-Copyright © 2014-2015 Michael G. Noll
+Copyright © 2014-2016 Michael G. Noll
 
 See [LICENSE](LICENSE) for licensing information.
 
