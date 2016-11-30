@@ -15,9 +15,9 @@ resolvers ++= Seq(
 // Variables
 // -------------------------------------------------------------------------------------------------------------------
 
-val akkaVersion = "2.3.14"
-val javaVersion = "1.7"
-val mainScalaVersion = "2.10.5"
+val akkaVersion = "2.4.14"
+val javaVersion = "1.8"
+val mainScalaVersion = "2.11.8"
 
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ val mainScalaVersion = "2.10.5"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.0" % "test",
   "org.mockito" % "mockito-all" % "1.10.19" % "test"
 )
 
@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
 // Compiler settings
 // ---------------------------------------------------------------------------------------------------------------------
 
-crossScalaVersions := Seq(mainScalaVersion, "2.11.7")
+crossScalaVersions := Seq(mainScalaVersion, "2.12.0")
 
 scalaVersion := mainScalaVersion
 
@@ -123,12 +123,6 @@ testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/te
 //        testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oWUDT", "-eWUDT")
 //
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-o")
-
-// Workaround for highlighting, required for Scala versions < 2.11.2.
-// See https://github.com/scoverage/sbt-scoverage#highlighting
-ScoverageSbtPlugin.ScoverageKeys.coverageHighlighting := {
-  if (scalaBinaryVersion.value == "2.10") false else false
-}
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Misc settings

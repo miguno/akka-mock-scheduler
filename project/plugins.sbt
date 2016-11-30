@@ -14,7 +14,7 @@ addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.7.4")
 
 // https://github.com/scoverage/scalac-scoverage-plugin
 // https://github.com/scoverage/sbt-scoverage
-addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.0.2")
+addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.0")
 
 // https://github.com/scoverage/sbt-coveralls
 addSbtPlugin("org.scoverage" % "sbt-coveralls" % "1.0.0.BETA1")
