@@ -123,9 +123,3 @@ testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/te
 //        testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oWUDT", "-eWUDT")
 //
 testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-o")
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Misc settings
-// ---------------------------------------------------------------------------------------------------------------------
-// https://github.com/jrudolph/sbt-dependency-graph
-net.virtualvoid.sbt.graph.Plugin.graphSettings
