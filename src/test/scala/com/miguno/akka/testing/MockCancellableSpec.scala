@@ -1,6 +1,6 @@
 package com.miguno.akka.testing
 
-import org.scalatest.mock.MockitoSugar
+import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 
 class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with MockitoSugar {
