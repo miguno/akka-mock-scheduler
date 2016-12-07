@@ -5,6 +5,7 @@ This release adds support for Scala 2.12.
 IMPROVEMENTS
 
 * [GH-7] Update dependency versions including Akka (now using Akka 2.4.14).  Add support for Scala 2.12.
+  (thanks koshelev)
 
 BREAKING CHANGES
 
