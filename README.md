@@ -61,15 +61,22 @@ This project is published to [Sonatype](https://oss.sonatype.org/).
 * Snapshots are available in the
   [Sonatype Snapshot repository](https://oss.sonatype.org/content/repositories/snapshots).
 
-Latest **release** (works with Java 7+):
+Latest **release** (works with Java 8+):
 
 ```scala
-// Scala 2.10
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.10" % "0.4.0")
-
 // Scala 2.11
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.4.0")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.5.0")
+
+// Scala 2.12
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.0")
 ```
+
+> **Scala 2.10 support is deprecated**: the latest release for Scala 2.10 and Java 7 is `0.4.0.`.
+>
+> ```scala
+> // Scala 2.10
+> libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.10" % "0.4.0")
+> ```
 
 Latest **snapshot** (works with Java 8+):
 
@@ -77,10 +84,10 @@ Latest **snapshot** (works with Java 8+):
 resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
 
 // Scala 2.11
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.5.0-SNAPSHOT")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.5.1-SNAPSHOT")
 
 // Scala 2.12
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.0-SNAPSHOT")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.1-SNAPSHOT")
 ```
 
 
