@@ -1,3 +1,17 @@
+# 0.5.0 (December 07, 2016)
+
+This release adds support for Scala 2.12.
+
+IMPROVEMENTS
+
+* [GH-7] Update dependency versions including Akka (now using Akka 2.4.14).  Add support for Scala 2.12.
+
+BREAKING CHANGES
+
+* Supports only Scala 2.11 and Scala 2.12, built against Java 8.
+* Support for Scala 2.10 and Java 7 was dropped.  Use version `0.4.0` if you still need work against those.
+
+
 # 0.4.0 (December 14, 2015)
 
 IMPROVEMENTS
