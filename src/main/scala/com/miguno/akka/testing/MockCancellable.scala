@@ -2,7 +2,7 @@ package com.miguno.akka.testing
 
 import akka.actor.Cancellable
 
-private[testing] case class MockCancellable(scheduler: MockScheduler, task: Task) extends Cancellable {
+private[testing] case class MockCancellable(scheduler: MockScheduler, taskId: Long) extends Cancellable {
 
   private[this] var canceled: Boolean = false
 
@@ -21,7 +21,7 @@ private[testing] case class MockCancellable(scheduler: MockScheduler, task: Task
         case true => false
         case false => {
           canceled = true
-          scheduler.cancelTask(task)
+          scheduler.cancelTask(taskId)
           true
         }
       }

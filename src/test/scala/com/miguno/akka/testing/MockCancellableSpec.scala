@@ -5,11 +5,13 @@ import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 
 class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with MockitoSugar {
 
+  val mockId = 0L
+
   describe("MockCancellable") {
 
     it("should return true when cancelled the first time") {
       Given("an instance")
-      val cancellable = MockCancellable(mock[MockScheduler], mock[Task])
+      val cancellable = MockCancellable(mock[MockScheduler], mockId)
 
       When("I cancel it the first time")
       val result = cancellable.cancel()
@@ -20,7 +22,7 @@ class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with 
 
     it("should return false when cancelled the second time") {
       Given("an instance")
-      val cancellable = MockCancellable(mock[MockScheduler], mock[Task])
+      val cancellable = MockCancellable(mock[MockScheduler], mockId)
 
       When("I cancel it the second time")
       cancellable.cancel()
@@ -32,7 +34,7 @@ class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with 
 
     it("isCancelled should return false when cancel was not called yet") {
       Given("an instance")
-      val cancellable = MockCancellable(mock[MockScheduler], mock[Task])
+      val cancellable = MockCancellable(mock[MockScheduler], mockId)
 
       When("I ask whether it has been cancelled")
       Then("it returns false")
@@ -41,7 +43,7 @@ class MockCancellableSpec extends FunSpec with Matchers with GivenWhenThen with 
 
     it("isCancelled should return true when cancel was called already") {
       Given("an instance")
-      val cancellable = MockCancellable(mock[MockScheduler], mock[Task])
+      val cancellable = MockCancellable(mock[MockScheduler], mockId)
 
       And("the instance was cancelled")
       cancellable.cancel()

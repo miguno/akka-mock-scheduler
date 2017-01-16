@@ -55,12 +55,12 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
       val startTime = time.elapsed + delay
       val task = new Task(startTime, id, runnable, interval)
       tasks += task
-      MockCancellable(this, task)
+      MockCancellable(this, task.id)
     }
 
-  private[testing] def cancelTask(task: Task): Unit = {
+  private[testing] def cancelTask(taskId: Long): Unit = {
     time.lock synchronized {
-      tasks = tasks.filterNot { x => x == task }
+      tasks = tasks.filterNot { x => x.id == taskId}
     }
   }
 
