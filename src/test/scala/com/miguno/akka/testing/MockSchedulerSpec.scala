@@ -149,6 +149,29 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
       Then("the task should not run")
       counter.get should be(0)
     }
+
+    it("should not run a recurring cancelled task") {
+      Given("a time with a scheduler")
+      val time = new VirtualTime
+      And("and an execution context")
+      import scala.concurrent.ExecutionContext.Implicits.global
+
+      When("I schedule a recurring task")
+      val delay = 5.millis
+      val counter = new AtomicInteger(0)
+      val scheduledIncrement = time.scheduler.schedule(delay, delay)(counter.getAndIncrement)
+
+      And("I advance the time so that task is executed once")
+      time.advance(delay)
+      counter.get should be(1)
+
+      And("I cancel the task and advance the time further")
+      scheduledIncrement.cancel()
+      time.advance(delay)
+
+      Then("the task should not run any more")
+      counter.get should be(1)
+    }
   }
 
 }
