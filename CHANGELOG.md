@@ -1,3 +1,10 @@
+# 0.5.1 (January 17, 2017)
+
+BUG FIXES
+
+* [GH-8] Cancelled recurring task keeps executing. (thanks ivashin)
+
+
 # 0.5.0 (December 07, 2016)
 
 This release adds support for Scala 2.12.
