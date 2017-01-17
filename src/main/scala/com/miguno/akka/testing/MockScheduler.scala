@@ -60,7 +60,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
 
   private[testing] def cancelTask(task: Task): Unit = {
     time.lock synchronized {
-      tasks = tasks.filterNot { x => x == task }
+      tasks = tasks.filterNot { x => x.id == task.id }
     }
   }
 
