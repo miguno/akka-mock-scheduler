@@ -64,10 +64,6 @@ scalacOptions in Test ~= { (options: Seq[String]) =>
   options.filterNot(_ == "-Ywarn-value-discard").filterNot(_ == "-Ywarn-dead-code" /* to fix warnings due to Mockito */)
 }
 
-//scalacOptions in ScoverageTest ~= { (options: Seq[String]) =>
-//  options.filterNot(_ == "-Ywarn-value-discard").filterNot(_ == "-Ywarn-dead-code" /* to fix warnings due to Mockito */)
-//}
-
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Sonatype settings
