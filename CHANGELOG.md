@@ -17,7 +17,7 @@ IMPROVEMENTS
 BREAKING CHANGES
 
 * Supports only Scala 2.11 and Scala 2.12, built against Java 8.
-* Support for Scala 2.10 and Java 7 was dropped.  Use version `0.4.0` if you still need work against those.
+* Support for Scala 2.10 and Java 7 was dropped.  Use version `0.4.0` if you still need to work against those.
 
 
 # 0.4.0 (December 14, 2015)
