@@ -334,7 +334,7 @@ Example output:
 ## Running the test spec
 
 ```bash
-# Runs the tests for the main Scala version only (currently: 2.10.x)
+# Runs the tests for the main Scala version only (currently: 2.12.x)
 $ ./sbt test
 
 # Runs the tests for all configured Scala versions
