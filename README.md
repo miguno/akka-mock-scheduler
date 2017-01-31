@@ -96,6 +96,18 @@ libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.
 
 ## Examples
 
+### First step: start sbt console
+
+You can interactively test-drive the examples below via sbt console, which will automatically make the
+akka-mock-scheduler library (plus dependencies such as Akka) available in the console:
+
+```bash
+$ ./sbt console
+```
+
+Then you can copy-paste the example code below to play around.
+
+
 ### Example 1
 
 In this example we schedule a one-time task to run in 5 milliseconds from "now".  We create an instance of
@@ -110,12 +122,13 @@ Here, think of `time.advance()` as the logical equivalent of `Thread.sleep()`.
 ```scala
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
+import com.miguno.akka.testing.VirtualTime
 
 // A time instance has its own mock scheduler associated with it
 val time = new VirtualTime
 
 // Schedule a one-time task that increments a counter
-val counter = new AtomicInteger(0)
+val counter = new java.util.concurrent.atomic.AtomicInteger(0)
 time.scheduler.scheduleOnce(5.millis)(counter.getAndIncrement)
 
 time.advance(4.millis)
@@ -134,11 +147,16 @@ In your code you may want to make the scheduler configurable.  In the following 
 `scheduler` that defaults to Akka's `system.scheduler` (cf. `akka.actor.ActorSystem#scheduler`).
 
 ```scala
-class Foo(scheduler: Scheduler = system.scheduler) {
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration._
+
+val system = akka.actor.ActorSystem("my-system")
+
+class Foo(scheduler: akka.actor.Scheduler = system.scheduler) {
 
   scheduler.scheduleOnce(500.millis)(bar())
 
-  def bar: Unit = ???
+  def bar(): Unit = ???
 
 }
 ```
@@ -146,8 +164,10 @@ class Foo(scheduler: Scheduler = system.scheduler) {
 During testing you can then plug in the mock scheduler:
 
 ```scala
-val time = VirtualTime
-val foo = Foo(time.scheduler)
+import com.miguno.akka.testing.VirtualTime
+
+val time = new VirtualTime
+val foo = new Foo(time.scheduler)
 
 // ...actual tests follow...
 ```
@@ -161,7 +181,9 @@ for further details and examples.
 You can also run the include test suite, which includes `MockSchedulerSpec`, to improve your understanding of how
 the mock scheduler and virtual time work:
 
-    $ ./sbt clean test
+```bash
+$ ./sbt clean test
+```
 
 Example output:
 
@@ -304,11 +326,13 @@ Example output:
 
 ## Running the test spec
 
-    # Runs the tests for the main Scala version only (currently: 2.10.x)
-    $ ./sbt test
+```bash
+# Runs the tests for the main Scala version only (currently: 2.10.x)
+$ ./sbt test
 
-    # Runs the tests for all configured Scala versions
-    $ ./sbt "+ test"
+# Runs the tests for all configured Scala versions
+$ ./sbt "+ test"
+```
 
 
 ## Publishing to Sonatype
