@@ -337,7 +337,7 @@ Example output:
 # Runs the tests for the main Scala version only (currently: 2.12.x)
 $ ./sbt test
 
-# Runs the tests for all configured Scala versions
+# Runs the tests for all supported Scala versions
 $ ./sbt "+ test"
 ```
 
