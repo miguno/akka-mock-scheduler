@@ -140,11 +140,11 @@ time.scheduler.scheduleOnce(5.millis)(counter.getAndIncrement)
 
 time.advance(4.millis)
 assert(time.elapsed == 4.millis)
-assert(counter.get == 0) // <<< not yet, still too early
+assert(counter.get == 0) // <<< not yet incremented, still too early
 
 time.advance(1.millis)
 assert(time.elapsed == 5.millis)
-assert(counter.get == 1) // <<< task was run at the right time!
+assert(counter.get == 1) // <<< now incremented, which means the task was run at the right time!
 ```
 
 
