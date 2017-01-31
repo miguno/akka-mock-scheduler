@@ -64,6 +64,9 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
     }
   }
 
+  /**
+    * The maximum frequency is 1000 Hz.
+    */
   override val maxFrequency: Double = 1.second / 1.millis
 
 }

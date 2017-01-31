@@ -2,13 +2,29 @@ package com.miguno.akka.testing
 
 import java.util.concurrent.atomic.AtomicInteger
 
+import org.mockito.Mockito
+import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 
 import scala.concurrent.duration._
 
-class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen {
+class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen with MockitoSugar {
 
   describe("MockScheduler") {
+
+    it("should have a maximum frequency of 1000 Hz") {
+      Given("a scheduler")
+      val scheduler = {
+        val time = mock[VirtualTime](Mockito.withSettings().stubOnly())
+        new MockScheduler(time)
+      }
+
+      When("I ask for the maximum frequency")
+      val frequency = scheduler.maxFrequency
+
+      Then("the frequency is 1000 Hz")
+      frequency should be(1000)
+    }
 
     it("should run a one-time task once") {
       Given("a time with a scheduler")
