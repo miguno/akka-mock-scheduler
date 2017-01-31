@@ -14,7 +14,9 @@ A mock Akka scheduler to simplify testing scheduler-dependent code.
 Table of Contents
 
 * <a href="#Motivation">Motivation</a>
-* <a href="#Usage">Usage examples</a>
+* <a href="#Usage">Usage</a>
+    * <a href="#Build-dependency">Build dependency</a>
+    * <a href="#Examples">Examples</a>
 * <a href="#Design">Design and limitations</a>
 * <a href="#Development">Development</a>
 * <a href="#Changelog">Change log</a>
@@ -52,6 +54,9 @@ Please note that the scope of this project is not to become a full-fledged testi
 <a name="Usage"></a>
 
 # Usage
+
+
+<a name="Build-dependency"></a>
 
 ## Build dependency
 
@@ -93,6 +98,8 @@ libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.
 libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.2-SNAPSHOT")
 ```
 
+
+<a name="Examples"></a>
 
 ## Examples
 
