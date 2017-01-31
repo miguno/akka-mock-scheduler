@@ -176,7 +176,7 @@ import com.miguno.akka.testing.VirtualTime
 val time = new VirtualTime
 val foo = new Foo(time.scheduler)
 
-// ...actual tests follow...
+// Actual tests follow, which will leverage `time.advance(...)`.
 ```
 
 
