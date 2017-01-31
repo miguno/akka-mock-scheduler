@@ -16,6 +16,8 @@ class VirtualTime {
 
   val scheduler = new MockScheduler(this)
 
+  private val minimumAdvanceStep = 1.second / scheduler.maxFrequency
+
   /**
     * Returns how much "time" has elapsed so far.
     *
@@ -33,7 +35,7 @@ class VirtualTime {
     * @param step
     */
   def advance(step: FiniteDuration): Unit = {
-    require(step >= 1.millis, "minimum supported step is 1ms")
+    require(step >= minimumAdvanceStep, s"minimum supported step is $minimumAdvanceStep")
     lock synchronized {
       elapsedTime += step
       scheduler.tick()
