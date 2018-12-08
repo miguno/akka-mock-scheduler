@@ -15,7 +15,7 @@ resolvers ++= Seq(
 // Variables
 // -------------------------------------------------------------------------------------------------------------------
 
-val akkaVersion = "2.4.14"
+val akkaVersion = "2.5.19"
 val javaVersion = "1.8"
 val mainScalaVersion = "2.12.8"
 
