@@ -18,3 +18,7 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.0")
 
 // https://github.com/scoverage/sbt-coveralls
 addSbtPlugin("org.scoverage" % "sbt-coveralls" % "1.1.0")
+
+// https://github.com/xerial/sbt-sonatype
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "2.3")
+addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.0.0")
