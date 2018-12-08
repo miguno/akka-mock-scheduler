@@ -1,3 +1,8 @@
+# 0.5.2 (December 05, 2018)
+
+* Upgrade Akka to 2.5.19.
+* Built against Scala versions 2.12.8 and 2.11.12.
+
 # 0.5.1 (January 17, 2017)
 
 BUG FIXES
