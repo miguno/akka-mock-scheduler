@@ -17,7 +17,7 @@ resolvers ++= Seq(
 
 val akkaVersion = "2.4.14"
 val javaVersion = "1.8"
-val mainScalaVersion = "2.11.8"
+val mainScalaVersion = "2.12.8"
 
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
 // Compiler settings
 // ---------------------------------------------------------------------------------------------------------------------
 
-crossScalaVersions := Seq(mainScalaVersion, "2.12.0")
+crossScalaVersions := Seq(mainScalaVersion, "2.11.12")
 
 scalaVersion := mainScalaVersion
 
