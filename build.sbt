@@ -69,6 +69,14 @@ scalacOptions in Test ~= { (options: Seq[String]) =>
 // Sonatype settings
 // ---------------------------------------------------------------------------------------------------------------------
 
+// https://github.com/jodersky/sbt-gpg
+credentials += Credentials(
+  "GnuPG Key ID",
+  "gpg",
+  "5724DC6AAEC6D526992C234D07D42B2CB4799D71", // key identifier
+  "ignored" // this field is ignored; passwords are supplied by pinentry
+)
+
 publishMavenStyle := true
 
 publishTo := {
