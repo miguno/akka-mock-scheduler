@@ -368,7 +368,9 @@ run into the error "gpg: signing failed: Inappropriate ioctl for device".
 1. Make sure that the version identifier in `version.sbt` has a `-SNAPSHOT` suffix.
 2. Sign and publish the snapshot (note: `sonatypeRelease` is not needed for snapshots):
 
-        $ ./sbt "+ test" && ./sbt "+ publish"
+    ```shell
+    $ ./sbt "+ test" && ./sbt "+ publish"
+    ```
 
 
 ### Publishing a release
