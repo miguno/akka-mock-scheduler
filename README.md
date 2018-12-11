@@ -366,28 +366,20 @@ run into the error "gpg: signing failed: Inappropriate ioctl for device".
 ### Publishing a snaphost
 
 1. Make sure that the version identifier in `version.sbt` has a `-SNAPSHOT` suffix.
-2. Publish the snapshot:
+2. Sign and publish the snapshot (note: `sonatypeRelease` is not needed for snapshots):
 
         $ ./sbt "+ test" && ./sbt "+ publish"
 
 
 ### Publishing a release
 
-*See also [Sonatype's docs on how to release a deployment](http://central.sonatype.org/pages/releasing-the-deployment.html).*
-
 1. Make sure that the version identifier in `version.sbt` DOES NOT have a `-SNAPSHOT` suffix.
-2. Sign and publish the release artifacts into the Sonatype staging repository:
+2. Sign and publish the release artifacts. The commands below will stage, close, and release the artifacts using the
+   [sbt-sonatype](https://github.com/xerial/sbt-sonatype) plugin.  See also the Sonatype documentation on
+   [how to release a deployment](http://central.sonatype.org/pages/releasing-the-deployment.html).
 
     ```shell
-    $ ./sbt "+ test" && ./sbt "+ publish"
-    ```
-
-3. Promote the release.
-
-    ```shell
-    # Will `sonatypeClose` and `sonatypePromote` in one step.
-    # See https://github.com/xerial/sbt-sonatype
-    $ ./sbt "+ sonatypeRelease"
+    $ ./sbt "+ test" && ./sbt "+ publish" && ./sbt "+ sonatypeRelease"
     ```
 
 
