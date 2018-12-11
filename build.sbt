@@ -77,6 +77,8 @@ credentials += Credentials(
   "ignored" // this field is ignored; passwords are supplied by pinentry
 )
 
+sonatypeProfileName := "com.miguno"
+
 publishMavenStyle := true
 
 publishTo := {
