@@ -344,6 +344,23 @@ $ ./sbt "+ test"
 
 ## Publishing to Sonatype
 
+### Preparation
+
+Step 1: Ensure that your Sonatype credentials are available to `sbt`.
+
+For sbt 1.x:
+
+```
+$ cat ~/.sbt/1.0/sonatype.sbt
+credentials += Credentials("Sonatype Nexus Repository Manager",
+        "oss.sonatype.org",
+        "<sonatype-jira-username>",
+        "<sonatype-jira-password>")
+```
+
+Step 2: Ensure that your shell environment has set `export GPG_TTY=$(tty)` (e.g. in `~/.bashrc`), otherwise you might
+run into the error "gpg: signing failed: Inappropriate ioctl for device".
+
 
 ### Publishing a snaphost
 
