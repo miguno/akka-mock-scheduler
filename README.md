@@ -86,7 +86,8 @@ libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.
 > libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.10" % "0.4.0")
 > ```
 
-Latest **snapshot** (works with Java 8+):
+Latest **snapshot** (works with Java 8+; you can also
+[browse the snapshot repository](https://oss.sonatype.org/content/repositories/snapshots/com/miguno/akka/)):
 
 ```scala
 resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
