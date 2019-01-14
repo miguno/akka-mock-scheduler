@@ -5,9 +5,9 @@ A mock Akka scheduler to simplify testing scheduler-dependent code.
 [![Build Status](https://travis-ci.org/miguno/akka-mock-scheduler.svg?branch=develop)](https://travis-ci.org/miguno/akka-mock-scheduler)
 [![Coverage Status](https://coveralls.io/repos/miguno/akka-mock-scheduler/badge.svg?branch=develop&service=github)](https://coveralls.io/github/miguno/akka-mock-scheduler?branch=develop)
 [![License](http://img.shields.io/:license-Apache%202-red.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-[<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.10*.svg?label=latest%20release%20for%202.10"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.10%22)
-[<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.11*.svg?label=latest%20release%20for%202.11"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.11%22)
-[<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.12*.svg?label=latest%20release%20for%202.12"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.12%22)
+[<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.10.svg?label=latest%20release%20for%202.10"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.10%22)
+[<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.11.svg?label=latest%20release%20for%202.11"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.11%22)
+[<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.12.svg?label=latest%20release%20for%202.12"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.12%22)
 
 ---
 
