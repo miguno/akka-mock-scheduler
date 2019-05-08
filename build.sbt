@@ -15,7 +15,7 @@ resolvers ++= Seq(
 // Variables
 // -------------------------------------------------------------------------------------------------------------------
 
-val akkaVersion = "2.5.19"
+val akkaVersion = "2.5.22"
 val javaVersion = "1.8"
 val mainScalaVersion = "2.12.8"
 
@@ -26,7 +26,7 @@ val mainScalaVersion = "2.12.8"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.7" % "test",
   "org.mockito" % "mockito-all" % "1.10.19" % "test"
 )
 
@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
 // Compiler settings
 // ---------------------------------------------------------------------------------------------------------------------
 
-crossScalaVersions := Seq(mainScalaVersion, "2.11.12")
+crossScalaVersions := Seq(mainScalaVersion, "2.11.12", "2.13.0-M5")
 
 scalaVersion := mainScalaVersion
 
@@ -55,10 +55,11 @@ scalacOptions in Compile ++= Seq(
   "-feature",  // Emit warning and location for usages of features that should be imported explicitly.
   "-unchecked", // Enable additional warnings where generated code depends on assumptions.
   "-Xlint", // Enable recommended additional warnings.
-  "-Ywarn-adapted-args", // Warn if an argument list is modified to match the receiver.
   "-Ywarn-dead-code",
   "-Ywarn-value-discard" // Warn when non-Unit expression results are unused.
-)
+) ++ (if (!scalaVersion.value.startsWith("2.13")) Seq(
+  "-Ywarn-adapted-args" // Warn if an argument list is modified to match the receiver.
+) else Seq())
 
 scalacOptions in Test ~= { (options: Seq[String]) =>
   options.filterNot(_ == "-Ywarn-value-discard").filterNot(_ == "-Ywarn-dead-code" /* to fix warnings due to Mockito */)
