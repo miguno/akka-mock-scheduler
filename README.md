@@ -84,7 +84,7 @@ libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.
 libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.5.5")
 ```
 
-> **Scala 2.10 support is deprecated**: the latest release for Scala 2.10 and Java 7 is `0.4.0.`.
+> **Scala 2.10 support is deprecated**: the latest release for Scala 2.10 and Java 7 is `0.4.0`.
 >
 > ```scala
 > // Scala 2.10
