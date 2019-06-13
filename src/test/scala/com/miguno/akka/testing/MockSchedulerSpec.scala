@@ -3,7 +3,7 @@ package com.miguno.akka.testing
 import java.util.concurrent.atomic.AtomicInteger
 
 import org.mockito.Mockito
-import org.scalatest.mockito.MockitoSugar
+import org.scalatestplus.mockito.MockitoSugar
 import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
 
 import scala.concurrent.duration._
