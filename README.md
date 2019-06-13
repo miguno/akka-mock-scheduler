@@ -389,7 +389,11 @@ run into the error "gpg: signing failed: Inappropriate ioctl for device".
    [how to release a deployment](http://central.sonatype.org/pages/releasing-the-deployment.html).
 
     ```shell
+    # Publish release for all supported Scala versions
     $ ./sbt "+ test" && ./sbt "+ publish" && ./sbt "+ sonatypeRelease"
+
+    # Publish release for a specific Scala version only (here: 2.11.12)
+    $ ./sbt "++ 2.11.12 test" && ./sbt "++ 2.11.12 publish" && ./sbt sonatypeRelease
     ```
 
 3. `git tag` the release.
