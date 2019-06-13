@@ -1,7 +1,21 @@
+# 0.5.5 (June 13, 2018)
+
+IMPROVEMENTS
+
+* Support Scala 2.13.x.
+* Upgrade Akka to 2.5.23.
+* Built against Scala versions 2.13.0, 2.12.8, and 2.11.12 (using JDK 8).
+
+CHANGES
+
+* Default Scala version changed from 2.12.x to 2.13.x.
+
+
 # 0.5.4 (December 11, 2018)
 
 * Upgrade Akka to 2.5.19.
 * Built against Scala versions 2.12.8 and 2.11.12.
+
 
 # 0.5.1 (January 17, 2017)
 

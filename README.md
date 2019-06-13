@@ -75,13 +75,13 @@ Latest **release** (works with Java 8+):
 
 ```scala
 // Scala 2.13
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.13" % "0.5.4")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.13" % "0.5.5")
 
 // Scala 2.12
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.4")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.5")
 
 // Scala 2.11
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.5.4")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.5.5")
 ```
 
 > **Scala 2.10 support is deprecated**: the latest release for Scala 2.10 and Java 7 is `0.4.0.`.
@@ -98,13 +98,13 @@ Latest **snapshot** (works with Java 8+; you can also
 resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
 
 // Scala 2.13
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.13" % "0.5.5-SNAPSHOT")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.13" % "0.5.6-SNAPSHOT")
 
 // Scala 2.12
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.5-SNAPSHOT")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.6-SNAPSHOT")
 
 // Scala 2.11
-libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.5.5-SNAPSHOT")
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.11" % "0.5.6-SNAPSHOT")
 ```
 
 
@@ -391,6 +391,8 @@ run into the error "gpg: signing failed: Inappropriate ioctl for device".
     ```shell
     $ ./sbt "+ test" && ./sbt "+ publish" && ./sbt "+ sonatypeRelease"
     ```
+
+3. `git tag` the release.
 
 
 <a name="Changelog"></a>
