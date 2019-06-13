@@ -5,12 +5,12 @@ after_success: "./sbt coveralls"
 language: scala
 
 scala:
-   - 2.13.0-M5
+   - 2.13.0
    - 2.12.8
    - 2.11.12
 
 jdk:
-  - oraclejdk8
+  - openjdk8
 
 # Workaround for Travis CI issue 5227, which results in a buffer overflow
 # caused by Java when running the build on OpenJDK.

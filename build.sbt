@@ -15,9 +15,9 @@ resolvers ++= Seq(
 // Variables
 // -------------------------------------------------------------------------------------------------------------------
 
-val akkaVersion = "2.5.22"
+val akkaVersion = "2.5.23"
 val javaVersion = "1.8"
-val mainScalaVersion = "2.12.8"
+val mainScalaVersion = "2.13.0"
 
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ val mainScalaVersion = "2.12.8"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
-  "org.scalatest" %% "scalatest" % "3.0.7" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.8" % "test",
   "org.mockito" % "mockito-all" % "1.10.19" % "test"
 )
 
@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
 // Compiler settings
 // ---------------------------------------------------------------------------------------------------------------------
 
-crossScalaVersions := Seq(mainScalaVersion, "2.11.12", "2.13.0-M5")
+crossScalaVersions := Seq(mainScalaVersion, "2.11.12", "2.12.8")
 
 scalaVersion := mainScalaVersion
 

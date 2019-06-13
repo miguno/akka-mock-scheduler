@@ -5,6 +5,7 @@ A mock Akka scheduler to simplify testing scheduler-dependent code.
 [![Build Status](https://travis-ci.org/miguno/akka-mock-scheduler.svg?branch=develop)](https://travis-ci.org/miguno/akka-mock-scheduler)
 [![Coverage Status](https://coveralls.io/repos/miguno/akka-mock-scheduler/badge.svg?branch=develop&service=github)](https://coveralls.io/github/miguno/akka-mock-scheduler?branch=develop)
 [![License](http://img.shields.io/:license-Apache%202-red.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+[<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.13.svg?label=latest%20release%20for%202.13"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.13%22)
 [<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.12.svg?label=latest%20release%20for%202.12"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.12%22)
 [<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.11.svg?label=latest%20release%20for%202.11"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.11%22)
 [<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.10.svg?label=latest%20release%20for%202.10"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.10%22)
@@ -68,10 +69,14 @@ This project is published to [Sonatype](https://oss.sonatype.org/).
 
 Latest **release** (works with Java 8+):
 
+* Scala 2.13: [<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.13.svg?label=latest%20release%20for%202.13"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.13%22)
 * Scala 2.12: [<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.12.svg?label=latest%20release%20for%202.12"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.12%22)
 * Scala 2.11: [<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.11.svg?label=latest%20release%20for%202.11"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.11%22)
 
 ```scala
+// Scala 2.13
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.13" % "0.5.4")
+
 // Scala 2.12
 libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.4")
 
@@ -91,6 +96,9 @@ Latest **snapshot** (works with Java 8+; you can also
 
 ```scala
 resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
+
+// Scala 2.13
+libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.13" % "0.5.5-SNAPSHOT")
 
 // Scala 2.12
 libraryDependencies ++= Seq("com.miguno.akka" % "akka-mock-scheduler_2.12" % "0.5.5-SNAPSHOT")
@@ -335,7 +343,7 @@ Example output:
 ## Running the test spec
 
 ```bash
-# Runs the tests for the main Scala version only (currently: 2.12.x)
+# Runs the tests for the main Scala version only (currently: 2.13.x)
 $ ./sbt test
 
 # Runs the tests for all supported Scala versions
