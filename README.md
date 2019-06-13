@@ -67,7 +67,8 @@ This project is published to [Sonatype](https://oss.sonatype.org/).
 * Snapshots are available in the
   [Sonatype Snapshot repository](https://oss.sonatype.org/content/repositories/snapshots).
 
-Latest **release** (works with Java 8+):
+Latest **release** (works with Java 8+; you can also
+[browse the release repository](https://repo1.maven.org/maven2/com/miguno/akka/)):
 
 * Scala 2.13: [<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.13.svg?label=latest%20release%20for%202.13"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.13%22)
 * Scala 2.12: [<img src="https://img.shields.io/maven-central/v/com.miguno.akka/akka-mock-scheduler_2.12.svg?label=latest%20release%20for%202.12"/>](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22akka-mock-scheduler_2.12%22)
