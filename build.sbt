@@ -71,6 +71,9 @@ scalacOptions in Test ~= { (options: Seq[String]) =>
 // ---------------------------------------------------------------------------------------------------------------------
 
 // https://github.com/jodersky/sbt-gpg
+//
+// Note: As of v2.0.0 this is also supported by https://github.com/sbt/sbt-pgp.
+//       See https://github.com/sbt/sbt-pgp/issues/125.
 credentials += Credentials(
   "GnuPG Key ID",
   "gpg",
