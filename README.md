@@ -291,7 +291,7 @@ Example output:
     [info]   + Given a time with a scheduler
     [info]   + And an execution context
     [info]   + When I schedule a recurring task
-    [info]   + And I advance the time so that task is executed once
+    [info]   + And I advance the time so that the task is executed once
     [info]   + And I cancel the task and advance the time further
     [info]   + Then the task should not run any more
     [info] MockCancellableSpec:
