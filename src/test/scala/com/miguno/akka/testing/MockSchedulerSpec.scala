@@ -29,7 +29,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen with Mo
     it("should run a one-time task once") {
       Given("a time with a scheduler")
       val time = new VirtualTime
-      And("and an execution context")
+      And("an execution context")
       import scala.concurrent.ExecutionContext.Implicits.global
 
       When("I schedule a one-time task")
@@ -50,7 +50,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen with Mo
     it("should run a recurring task multiple times") {
       Given("a time with a scheduler")
       val time = new VirtualTime
-      And("and an execution context")
+      And("an execution context")
       import scala.concurrent.ExecutionContext.Implicits.global
 
       When("I schedule a recurring task")
@@ -85,7 +85,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen with Mo
     it("should run tasks with different delays in order") {
       Given("a time with a scheduler")
       val time = new VirtualTime
-      And("and an execution context")
+      And("an execution context")
       import scala.concurrent.ExecutionContext.Implicits.global
 
       When("I schedule a recurring task A")
@@ -111,7 +111,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen with Mo
     it("should run tasks that are scheduled for the same time in order of their registration with the scheduler") {
       Given("a time with a scheduler")
       val time = new VirtualTime
-      And("and an execution context")
+      And("an execution context")
       import scala.concurrent.ExecutionContext.Implicits.global
 
       When("I schedule a one-time task A")
@@ -131,7 +131,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen with Mo
     it("should support recursive scheduling") {
       Given("a time with a scheduler")
       val time = new VirtualTime
-      And("and an execution context")
+      And("an execution context")
       import scala.concurrent.ExecutionContext.Implicits.global
 
       When("I schedule a task A that schedules another task B")
@@ -151,7 +151,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen with Mo
     it("should not run a cancelled task") {
       Given("a time with a scheduler")
       val time = new VirtualTime
-      And("and an execution context")
+      And("an execution context")
       import scala.concurrent.ExecutionContext.Implicits.global
 
       When("I schedule a one-time task")
@@ -169,7 +169,7 @@ class MockSchedulerSpec extends FunSpec with Matchers with GivenWhenThen with Mo
     it("should not run a recurring task after it was cancelled") {
       Given("a time with a scheduler")
       val time = new VirtualTime
-      And("and an execution context")
+      And("an execution context")
       import scala.concurrent.ExecutionContext.Implicits.global
 
       When("I schedule a recurring task")

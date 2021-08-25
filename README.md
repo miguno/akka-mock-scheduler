@@ -245,14 +245,14 @@ Example output:
     [info] MockScheduler
     [info] - should run a one-time task once
     [info]   + Given a time with a scheduler
-    [info]   + And and an execution context
+    [info]   + And an execution context
     [info]   + When I schedule a one-time task
     [info]   + Then the task should not run before its delay
     [info]   + And the task should run at the time of its delay
     [info]   + And the task should not run again
     [info] - should run a recurring task multiple times
     [info]   + Given a time with a scheduler
-    [info]   + And and an execution context
+    [info]   + And an execution context
     [info]   + When I schedule a recurring task
     [info]   + Then the task should not run before its initial delay
     [info]   + And it should run at the time of its initial delay (run #1)
@@ -263,33 +263,33 @@ Example output:
     [info]   + And it should have run 103 times after the initial delay and 102 intervals
     [info] - should run tasks with different delays in order
     [info]   + Given a time with a scheduler
-    [info]   + And and an execution context
+    [info]   + And an execution context
     [info]   + When I schedule a recurring task A
     [info]   + And I schedule a one-time task B to run when A has already been run a couple of times
     [info]   + Then A should run before B
     [info]   + And A should continue to run after B finished
     [info] - should run tasks that are scheduled for the same time in order of their registration with the scheduler
     [info]   + Given a time with a scheduler
-    [info]   + And and an execution context
+    [info]   + And an execution context
     [info]   + When I schedule a one-time task A
     [info]   + And I then schedule a recurring task B whose initial run is scheduled at the same time as A
     [info]   + And I then schedule a one-time task C to run at the same time as A
     [info]   + Then A should run before B, and B should run before C
     [info] - should support recursive scheduling
     [info]   + Given a time with a scheduler
-    [info]   + And and an execution context
+    [info]   + And an execution context
     [info]   + When I schedule a task A that schedules another task B
     [info]   + And I advance the time so that A was already run (and thus B is now registered with the scheduler)
     [info]   + Then B should be run with the configured delay (which will happen in one of the next ticks of the scheduler)
     [info] - should not run a cancelled task
     [info]   + Given a time with a scheduler
-    [info]   + And and an execution context
+    [info]   + And an execution context
     [info]   + When I schedule a one-time task
     [info]   + And I cancel the task before its execution time
     [info]   + Then the task should not run
     [info] - should not run a recurring task after it was cancelled
     [info]   + Given a time with a scheduler
-    [info]   + And and an execution context
+    [info]   + And an execution context
     [info]   + When I schedule a recurring task
     [info]   + And I advance the time so that task is executed once
     [info]   + And I cancel the task and advance the time further
